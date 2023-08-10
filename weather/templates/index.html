@@ -1,13 +1,25 @@
 {% extends "base.html" %} {% load static %} {% load tz %} {% block content %}
 <div class="container">
-  <div class="text-center">
-    <img src="https://openweathermap.org/img/wn/{{weather.weather.0.icon}}@2x.png" alt="">
-    <h1>{% now "Y/m/d H:i" %}</h1>
-    <h1>{{weather.name}}</h1>
-    <h2>{{weather.weather.0.main}} [ {{weather.weather.0.description}} ]</h2>
-    <h3>{{weather.main.temp}} ℃</h3>
-    <h3>{{weather.wind.speed}} m/sec</h3>
-  </div>
+    <div class="text-center">
+        <h1>{% now "Y/m/d H:i" %}</h1>
+
+        <section>
+            <span class="material-icons md-64">location_on</span>
+            <h1>{{weather.name}}</h1>
+        </section>
+        <section>   
+            <img src="https://openweathermap.org/img/wn/{{weather.weather.0.icon}}@2x.png" alt="weather icon"/>
+            <h2>{{weather.weather.0.main}} [ {{weather.weather.0.description}} ]</h2>
+        </section>
+        <section>
+            <span class="material-icons md-64">thermostat</span>
+            <h3>{{weather.main.temp}} ℃</h3>
+        </section>
+        <section>
+            <span class="material-icons md-64">air</span>
+            <h3>{{weather.wind.speed}} m/sec</h3>
+        </section>
+    </div>
 </div>
 
 {% endblock %}
