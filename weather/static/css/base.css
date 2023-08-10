@@ -1,0 +1,8 @@
+/* カスタムスタイル */
+.custom-bg {
+    background-image: url('https://user0514.cdnw.net/shared/img/thumb/aig-ai230605031-xl_TP_V.jpg');
+    background-size: cover; /* 画面いっぱいに画像を表示 */
+    background-position: center center; /* 画像を横軸・縦軸ともに中心に配置 */
+    background-repeat: no-repeat; /* 背景画像の繰り返しを無効化 */
+    background-attachment: fixed; /* スクロールしても背景画像を固定 */
+}
