@@ -1,4 +1,9 @@
 /* カスタムスタイル */
+
+.custom-text-color {
+    color: white;
+}
+
 .custom-bg {
     background-image: url('https://user0514.cdnw.net/shared/img/thumb/aig-ai230605031-xl_TP_V.jpg');
     background-size: cover; /* 画面いっぱいに画像を表示 */

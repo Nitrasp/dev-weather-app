@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-import requests
+import requests, json
 from django.http import JsonResponse
 from config.settings import API_KEY
 
@@ -27,9 +27,16 @@ class InitView(TemplateView):
     # APIリクエストの発行
     def weather_api_get(self, city):
         
+        # 気象情報の取得
         url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&lang=ja&units=metric'
-        response = requests.get(url)
-        data = response.json()  # レスポンスをJSON形式で取得
+        res_weather_inf = requests.get(url)
+        data = res_weather_inf.json()  # レスポンスをJSON形式で取得
+
+        print(type(data))
+        
+        # 気象アイコンの取得
+        url = f'https://openweathermap.org/img/wn/10d@2x.png'
+        res_weather_icon = requests.get(url)
         
         return data
     
