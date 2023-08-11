@@ -1,3 +1,21 @@
+/* カスタムタグ */
+html {
+  font-size: 16;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  border-top: #0000004a;
+  margin: auto;
+}
+
+p {
+  font-size: 2rem;
+}
+
 /* カスタムスタイル */
 
 .custom-text-color {
@@ -12,10 +30,18 @@
   background-attachment: fixed; /* スクロールしても背景画像を固定 */
 }
 
-.material-icons.md-64 {
-  font-size: 64px;
+.material-icons.md-4rem {
+  font-size: 4rem;
 }
 
-h1 {
-  text-align: center;
+.overlay-gray {
+  max-width: 100%;
+  background-color: #0000004a; /* 透明度20％のグレー */
+  pointer-events: none; /* オーバーレイ部分へのクリック等のイベントを無効化 */
+}
+
+.table.custom-weather-app {
+  --bs-table-bg: #ffffff00; /* カスタムプロパティを設定 */
+  --bs-table-color: white;
+  --bs-table-border-color: #dee2e633;
 }

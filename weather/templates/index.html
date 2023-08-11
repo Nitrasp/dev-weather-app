@@ -1,25 +1,38 @@
 {% extends "base.html" %} {% load static %} {% load tz %} {% block content %}
 <div class="container">
-    <div class="text-center">
-        <h1>{% now "Y/m/d H:i" %}</h1>
+    <div class="overlay-gray d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="text-center">
+            <h1>{% now "Y/m/d H:i" %}</h1>
+            <hr>
 
-        <section>
-            <span class="material-icons md-64">location_on</span>
-            <h1>{{weather.name}}</h1>
-        </section>
-        <section>   
-            <img src="https://openweathermap.org/img/wn/{{weather.weather.0.icon}}@2x.png" alt="weather icon"/>
-            <h2>{{weather.weather.0.main}} [ {{weather.weather.0.description}} ]</h2>
-        </section>
-        <section>
-            <span class="material-icons md-64">thermostat</span>
-            <h3>{{weather.main.temp}} ℃</h3>
-        </section>
-        <section>
-            <span class="material-icons md-64">air</span>
-            <h3>{{weather.wind.speed}} m/sec</h3>
-        </section>
+            <table class="table table-bordered custom-weather-app">
+                <thead class="col-1">
+                    <th>
+                        <p>{{weather.name}}</p>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="https://openweathermap.org/img/wn/{{weather.weather.0.icon}}@2x.png" alt="weather icon"/>
+                            <p><b>{{weather.weather.0.main}} [ {{weather.weather.0.description}} ]</b></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="material-icons md-4rem">thermostat</span>
+                            <p><b>{{weather.main.temp}} ℃</b></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="material-icons md-4rem">air</span>
+                            <p><b>{{weather.wind.speed}} m/sec</b></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-
 {% endblock %}

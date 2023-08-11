@@ -4,5 +4,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('week/', views.InitView.as_view(), name='weather'),
+    path('daily/', views.InitView.as_view(), name='weather'),
 ]
