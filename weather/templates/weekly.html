@@ -1,16 +1,23 @@
 {% extends "base.html" %} {% load static %} {% load tz %} {% block content %}
 <div class="container">
-    <div class="overlay-gray d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="text-center">
-            <h1>{% now "Y/m/d H:i" %}</h1>
-            <hr>
-            <p>{{city_name}}</p>
-
+    <div class="overlay-gray justify-content-center align-items-center text-center" style="min-height: 100vh;">
+        <h1>{% now "Y/m/d H:i" %}</h1>
+        <hr>
+        <h2>{{city_name}}</h2>
+    
+        <div class="table-responsive">
             <table class="table table-bordered custom-weather-app">
-                <thead class="col-1">
+                <thead class="col-{{list|length}}">
+                    <tr>
+                        <tr>
+                        {% for key, value in date_dict.items %}
+                            <th colspan="{{value}}"><h3>{{ key }}</h3></th>
+                        {% endfor %}
+                        </tr>
+                    </tr>
                     <tr>
                         {% for d in list %}
-                        <th>{{d.dt_text}}</th>
+                        <th class="col-1"><p>{{d.time_text}}</p></th>
                         {% endfor %}
                     </tr>
                 </thead>
@@ -18,15 +25,15 @@
                     <tr>
                         {% for d in list %}
                         <td>
-                            <img src="https://openweathermap.org/img/wn/{{d.weather.0.icon}}@2x.png" alt="weather icon"/>
-                            <p><b>{{d.weather.0.main}} [ {{d.weather.0.description}} ]</b></p>
+                            <img src="https://openweathermap.org/img/wn/{{d.weather.icon}}@2x.png" alt="weather icon"/>
+                            <p><b>{{d.weather.main}}</b></p>
+                            <p><b>[ {{d.weather.description}} ]</b></p>
                         </td>
                         {% endfor %}
                     </tr>
                     <tr>
                         {% for d in list %}
                         <td>
-                            <span class="material-icons md-4rem">thermostat</span>
                             <p><b>{{d.main.temp}} ℃</b></p>
                         </td>
                         {% endfor %}
@@ -34,7 +41,6 @@
                     <tr>
                         {% for d in list %}
                         <td>
-                            <span class="material-icons md-4rem">air</span>
                             <p><b>{{d.wind.speed}} m/sec</b></p>
                         </td>
                         {% endfor %}

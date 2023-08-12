@@ -57,11 +57,28 @@
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                都市
+                当日の天気
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% for city in cities %}
                 <li><a class="dropdown-item" href="{% url 'daily' city=city.name %}">{{city.name}}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                週間天気
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for city in cities %}
+                <li><a class="dropdown-item" href="{% url 'weekly' city=city.name %}">{{city.name}}</a></li>
                 {% endfor %}
               </ul>
             </li>

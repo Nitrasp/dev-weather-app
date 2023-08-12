@@ -18,7 +18,7 @@ def weather_api_get(city, api_type):
     
     if Api_type.Daily == api_type:
         # APIタイプが日次（Daily）の場合
-        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&lang=ja&units=metric'
+        url = f'http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&lang=ja&units=metric'
     elif Api_type.Weekly == api_type:
         # APIタイプが週次（Weekly）の場合
         url = f'http://api.openweathermap.org/data/2.5/forecast?q={city}&appid={API_KEY}&lang=ja&units=metric'
