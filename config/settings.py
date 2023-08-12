@@ -136,3 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 天気情報APIのAPIキー
 API_KEY = config('API_KEY')
+# 取得対象の国名
+COUNTRY_NAME = config('COUNTRY_NAME')

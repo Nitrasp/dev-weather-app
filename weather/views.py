@@ -1,42 +1,49 @@
+from config.settings import COUNTRY_NAME
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-import requests, json
-from django.http import JsonResponse
-from config.settings import API_KEY
+from enum import Enum
+from .models import City
+from . import util
+import datetime, locale
 
-# 初期表示ビュークラス
-class InitView(TemplateView):
-    
-    template_name = 'index.html'
-    
-    # 変数を渡す
-    def get_context_data(self,**kwargs):
+# 共通処理クラス
+class baseView(TemplateView):
+    def get_context_data(self):
         
-        context = super().get_context_data(**kwargs)
+        context = super().get_context_data()
         
-        location = 'Tokyo,JP'
-        
-        # 都市の気象情報を取得
-        weather_info = self.weather_api_get(location)
+        # 都市一覧の取得
+        cities = City.objects.filter(country=COUNTRY_NAME)
         
         # コンテキストに情報を設定
-        context['weather'] = weather_info
+        context['cities'] = cities
         
         return context
-    
-    # APIリクエストの発行
-    def weather_api_get(self, city):
-        
-        # 気象情報の取得
-        url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&lang=ja&units=metric'
-        res_weather_inf = requests.get(url)
-        data = res_weather_inf.json()  # レスポンスをJSON形式で取得
 
-        print(type(data))
+# 初期表示ビュークラス
+class InitView(baseView):
         
-        # 気象アイコンの取得
-        url = f'https://openweathermap.org/img/wn/10d@2x.png'
-        res_weather_icon = requests.get(url)
+    # GET通信
+    def get(self, request, country=None):
         
-        return data
-    
+        template_name = 'index.html'
+        
+        if country == None:
+            location = f'Tokyo,{COUNTRY_NAME}'
+        else:
+            location = f'{country},{COUNTRY_NAME}'
+        
+        # 都市の気象情報を取得
+        weather_info = util.weather_api_get(location)
+        
+        # localeモジュールで時間のロケールを'ja_JP.UTF-8'に変更する
+        locale.setlocale(locale.LC_TIME, 'ja_JP.UTF-8')
+        dt_text = datetime.datetime.fromtimestamp(weather_info['dt']).strftime ( '%m月 %d日(%a)' )
+        print(dt_text)
+        
+        # コンテキストに情報を設定
+        context = super().get_context_data()
+        context['weather'] = weather_info
+        context['dt_text'] = dt_text
+
+        return render(request, template_name, context)
