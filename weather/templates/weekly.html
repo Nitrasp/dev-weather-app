@@ -4,31 +4,40 @@
         <div class="text-center">
             <h1>{% now "Y/m/d H:i" %}</h1>
             <hr>
+            <p>{{city_name}}</p>
 
             <table class="table table-bordered custom-weather-app">
                 <thead class="col-1">
-                    <th>
-                        <p>{{weather.name}}</p>
-                    </th>
+                    <tr>
+                        {% for d in list %}
+                        <th>{{d.dt_text}}</th>
+                        {% endfor %}
+                    </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        {% for d in list %}
                         <td>
-                            <img src="https://openweathermap.org/img/wn/{{weather.weather.0.icon}}@2x.png" alt="weather icon"/>
-                            <p><b>{{weather.weather.0.main}} [ {{weather.weather.0.description}} ]</b></p>
+                            <img src="https://openweathermap.org/img/wn/{{d.weather.0.icon}}@2x.png" alt="weather icon"/>
+                            <p><b>{{d.weather.0.main}} [ {{d.weather.0.description}} ]</b></p>
                         </td>
+                        {% endfor %}
                     </tr>
                     <tr>
+                        {% for d in list %}
                         <td>
                             <span class="material-icons md-4rem">thermostat</span>
-                            <p><b>{{weather.main.temp}} ℃</b></p>
+                            <p><b>{{d.main.temp}} ℃</b></p>
                         </td>
+                        {% endfor %}
                     </tr>
                     <tr>
+                        {% for d in list %}
                         <td>
                             <span class="material-icons md-4rem">air</span>
-                            <p><b>{{weather.wind.speed}} m/sec</b></p>
+                            <p><b>{{d.wind.speed}} m/sec</b></p>
                         </td>
+                        {% endfor %}
                     </tr>
                 </tbody>
             </table>

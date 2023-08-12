@@ -61,7 +61,7 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 {% for city in cities %}
-                <li><a class="dropdown-item" href="{% url 'daily' country=city.name %}">{{city.name}}</a></li>
+                <li><a class="dropdown-item" href="{% url 'daily' city=city.name %}">{{city.name}}</a></li>
                 {% endfor %}
               </ul>
             </li>
